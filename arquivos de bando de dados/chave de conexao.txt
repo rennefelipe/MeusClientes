@@ -1,0 +1,3 @@
+Data Source=WIN-P5EINVHJ7M5;Initial Catalog=BancoMeusClientes;User ID=admin;Password=Servidor@123
+
+Data Source=WIN-P5EINVHJ7M5;Initial Catalog=BancoMeusClientes;Persist Security Info=True;User ID=admin;Password=Servidor@123

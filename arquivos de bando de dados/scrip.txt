@@ -1,0 +1,88 @@
+CREATE TABLE DadoContato 
+    (
+     Id INTEGER (50) NOT NULL IDENTITY(1,1) , 
+     Celular VARCHAR (50) , 
+     Telefone VARCHAR (50) , 
+     Email VARCHAR (50) 
+    )
+GO
+
+ALTER TABLE DadoContato ADD CONSTRAINT DadoContato_PK PRIMARY KEY CLUSTERED (Id)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE DadoEndereco 
+    (
+     Id INTEGER (50) NOT NULL IDENTITY(1,1) , 
+     Endereco VARCHAR (90) , 
+     Bairro VARCHAR (50) , 
+     Cidade VARCHAR (50) , 
+     CEP VARCHAR (50) 
+    )
+GO
+
+ALTER TABLE DadoEndereco ADD CONSTRAINT DadoEndereco_PK PRIMARY KEY CLUSTERED (Id)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE DadoPessoal 
+    (
+     Id INTEGER (50) NOT NULL IDENTITY(1,1) , 
+     Nome VARCHAR (50) , 
+     CPF VARCHAR (50) , 
+     DataNasc DATE , 
+     DadoEndereco_Id INTEGER (50) NOT NULL , 
+     DadoContato_Id INTEGER (50) NOT NULL 
+    )
+GO
+
+ALTER TABLE DadoPessoal ADD CONSTRAINT DadoCliente_PK PRIMARY KEY CLUSTERED (Id)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE HistoricoSuporte 
+    (
+     Id INTEGER (50) NOT NULL IDENTITY(1,1) , 
+     Equipamento VARCHAR (50) , 
+     DataManutencao DATE , 
+     Anotacao VARCHAR (90) 
+    )
+GO
+
+ALTER TABLE HistoricoSuporte ADD CONSTRAINT HistoricoSuporte_PK PRIMARY KEY CLUSTERED (Id)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+ALTER TABLE DadoPessoal 
+    ADD CONSTRAINT DadoPessoal_DadoContato_FK FOREIGN KEY 
+    ( 
+     DadoContato_Id
+    ) 
+    REFERENCES DadoContato 
+    ( 
+     Id 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE DadoPessoal 
+    ADD CONSTRAINT DadoPessoal_DadoEndereco_FK FOREIGN KEY 
+    ( 
+     DadoEndereco_Id
+    ) 
+    REFERENCES DadoEndereco 
+    ( 
+     Id 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
